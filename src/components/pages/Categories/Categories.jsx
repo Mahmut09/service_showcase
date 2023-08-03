@@ -8,15 +8,17 @@ const Categories = () => {
     const URL = useSelector(state => state.toolkit.URL);
     const [categories, setCategories] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [fetchError, setFetchError] = useState(null);
 
     useEffect(() => {
         const fetchCategories = async () => {
             try {
                 setIsLoading(true);
+                setFetchError(null);
                 const data = await fetchData(URL + 'v1/service-category');
                 setCategories(data);
             } catch (error) {
-                console.log("Error", error);
+                setFetchError(error.message);
             } finally {
                 setIsLoading(false);
             }
@@ -27,6 +29,10 @@ const Categories = () => {
 
     if (isLoading) {
         return <div>Loading...</div>;
+    }
+
+    if (fetchError) {
+        return <h2>Категории временно не доступны, попробуйте позже.</h2>;
     }
 
     return (

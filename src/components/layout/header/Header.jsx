@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import Styles from './Header.module.scss'
 import Logo from '../../../assets/images/logo.png'
 
@@ -7,9 +7,9 @@ const Header = () => {
     return (
         <header className={Styles.header}>
             
-            <div className={Styles.logo}>
+            <Link to={"/"} className={Styles.logo}>
                 <img src={Logo} alt="logo" />
-            </div>
+            </Link>
             <nav className={Styles.nav}>
                 <NavLink to={"/"} >Категории</NavLink>
                 <NavLink to={"/services"} >Сервисы</NavLink>

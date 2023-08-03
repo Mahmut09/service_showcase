@@ -13,7 +13,7 @@ const ServiceCard = ({ name, pictureUrl, fields }) => {
             setFormIsOpen(!formIsOpen);
         }
     }
-
+    
     return (
         <>
             <div className={Styles.card} onClick={handleFormOpen}>

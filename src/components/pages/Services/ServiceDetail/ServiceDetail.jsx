@@ -10,15 +10,17 @@ const ServiceDetail = () => {
     const { serviceId } = useParams();
     const [categoryData, setCategoryData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [fetchError, setFetchError] = useState(null);
 
     useEffect(() => {
         const fetchCategories = async () => {
             try {
                 setIsLoading(true);
+                setFetchError(null);
                 const data = await fetchData(URL + `v1/service?category_id=${serviceId}`);
                 setCategoryData(data);
             } catch (error) {
-                console.log("Error", error);
+                setFetchError(error.message);
             } finally {
                 setIsLoading(false);
             }
@@ -35,13 +37,17 @@ const ServiceDetail = () => {
         return <ServicePlug />
     }
 
+    if (fetchError) {
+        return <h2>Сервисы временно не доступны, попробуйте позже.</h2>;
+    }
+
     return (
         <>
             {
                 categoryData.map(item => (
                     <ServiceCard
                         key={item.id}
-                        name={item.name}
+                        name={item.name.replace("_", " ")}
                         site={item.site}
                         pictureUrl={item.picture_url}
                         fields={item.fields}
