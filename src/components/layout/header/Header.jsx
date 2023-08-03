@@ -1,14 +1,14 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import Styles from './Header.module.scss'
-import logo from '../../../assets/images/logo.png'
+import Logo from '../../../assets/images/logo.png'
 
 const Header = () => {
     return (
         <header className={Styles.header}>
             
             <div className={Styles.logo}>
-                <img src={logo} alt="logo" />
+                <img src={Logo} alt="logo" />
             </div>
             <nav className={Styles.nav}>
                 <NavLink to={"/"} >Категории</NavLink>

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { fetchData } from '../../../../api/Api';
 import { useSelector } from 'react-redux'
+import ServicePlug from '../ServicePlug/ServicePlug';
+import ServiceCard from '../ServiceCard/ServiceCard';
 
 const ServiceDetail = () => {
     const URL = useSelector(state => state.toolkit.URL);
@@ -24,22 +26,29 @@ const ServiceDetail = () => {
 
         fetchCategories();
     }, [URL, serviceId]);
-    console.log(categoryData);
 
     if (isLoading) {
         return <div>Loading...</div>;
     }
 
+    if (categoryData.length === 0) {
+        return <ServicePlug />
+    }
+
     return (
-        <div>
+        <>
             {
                 categoryData.map(item => (
-                    <div key={item.id}>
-                        {item.name}
-                    </div>
+                    <ServiceCard
+                        key={item.id}
+                        name={item.name}
+                        site={item.site}
+                        pictureUrl={item.picture_url}
+                        fields={item.fields}
+                    />
                 ))
             }
-        </div>
+        </>
     );
 }
 

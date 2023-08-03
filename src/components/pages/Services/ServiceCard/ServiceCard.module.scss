@@ -1,0 +1,6 @@
+@import '../../../../assets/styles/mixins.scss'; 
+
+.card {
+    @include cardMixin;
+    padding: 4em 2em;
+}
