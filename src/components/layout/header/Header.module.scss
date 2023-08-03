@@ -1,0 +1,41 @@
+@import '../../../assets/styles/global.scss';
+@import '../../../assets/styles/mixins.scss'; 
+
+.header {
+    width: 73%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    color: $fontColor;
+    justify-content: space-between;
+    padding: 36px 0;
+}
+
+.logo {
+    width: max(140px, 13.5%);
+    img {
+        width: 100%;
+        cursor: pointer;
+    }
+}
+
+.nav {
+    display: flex;
+    width: 46%; // 1402
+    justify-content: space-between;
+    align-items: center;
+    a {
+        font-weight: 600;
+        font-size: calc(var(--base-font-size) + 0.1vw);
+        transition: .3s;
+
+        &:hover {
+            color: $fontHoverColor;
+        }
+    }
+}
+
+.btn {
+    @include buttonMixin;
+    width: max(128px, 12%);
+}
