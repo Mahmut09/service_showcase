@@ -1,5 +1,5 @@
 @import '../../../assets/styles/global.scss';
-@import '../../../assets/styles/mixins.scss'; 
+@import '../../../assets/styles/mixins.scss';
 
 .header {
     width: 73%;
@@ -9,10 +9,32 @@
     color: $fontColor;
     justify-content: space-between;
     padding: 36px 0;
+
+    @media screen and (max-width: 1024px) {
+        width: 95%;
+    }
+
+    @media screen and (max-width: 530px) {
+        justify-content: center;
+        gap: 14px;
+    }
+
+    @media screen and (max-width: 375px) {
+        width: 85%;
+        flex-wrap: wrap;
+
+        .logo,
+        .burgerMenu,
+        .search,
+        .btn {
+            flex: 35%;
+        }
+    }
 }
 
 .logo {
-    width: max(140px, 13.5%);
+    width: max(110px, 13.5%);
+
     img {
         width: 100%;
         cursor: pointer;
@@ -21,9 +43,10 @@
 
 .nav {
     display: flex;
-    width: 46%; // 1402
+    width: 40%;
     justify-content: space-between;
     align-items: center;
+
     a {
         font-weight: 600;
         font-size: calc(var(--base-font-size) + 0.1vw);
@@ -33,9 +56,113 @@
             color: $fontHoverColor;
         }
     }
+
+    @media screen and (max-width: 1024px) {
+        width: 30%;
+    }
+
+    @media screen and (max-width: 768px) {
+        display: none;
+        
+        &.open {
+            width: 70%;
+            display: flex;
+            justify-content: flex-start;
+            gap: 50px;
+        }
+    }
+
+    @media screen and (max-width: 425px) {
+        &.open {
+            width: 70%;
+            display: flex;
+            justify-content: flex-start;
+            gap: 10px;
+        }
+    }
+}
+
+.search {
+    input {
+        padding: 1em 1.8em 1em 1em;
+        border-radius: 8px;
+        border: 0;
+        background-color: #f9f9f9;
+        font-size: 1em;
+        background-image: url("../../../assets/images/search-symbol.png");
+        background-size: 12px;
+        background-repeat: no-repeat;
+        background-position: 95%;
+        transition: .3s ease-in-out;
+
+        &:focus {
+            outline: none;
+            border: 0;
+        }
+
+        @media screen and (max-width: 1024px) {
+            padding: .8em 1.8em .8em .8em;
+            font-size: .8em;
+        }
+
+        @media screen and (max-width: 530px) {
+            width: 100%;
+        }
+    }
+
+    @media screen and (max-width: 530px) {
+        width: 30%;
+    }
+
+    @media screen and (max-width: 768px) {
+        &.open {
+            display: none;
+        }
+    }
 }
 
 .btn {
     @include buttonMixin;
     width: max(128px, 12%);
+
+    @media screen and (max-width: 530px) {
+        width: 28%;
+        border-radius: 14px;
+        padding: 10px;
+    }
+
+    @media screen and (max-width: 768px) {
+        &.open {
+            display: none;
+        }
+    }
+}
+
+.burgerMenu {
+    display: none;
+    border: 0;
+    background-color: transparent;
+
+    span {
+        display: block;
+        width: 20px;
+        height: 3px;
+        background-color: #797979;
+    }
+
+    @media screen and (max-width: 768px) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+    }
+
+    &.open+.nav+.search,
+    &.open+.nav+.search+.btn {
+        display: none;
+    }
+}
+
+.open {
+    display: flex;
 }

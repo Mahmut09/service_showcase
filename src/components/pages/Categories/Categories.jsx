@@ -3,11 +3,13 @@ import Styles from './Categories.module.scss'
 import { useSelector } from 'react-redux'
 import { fetchData } from '../../../api/Api';
 import CategoryCard from './CategoryCard/CategoryCard';
+import Banner from '../../UI/banner/Banner';
+import Loader from '../../UI/loader/Loader';
 
 const Categories = () => {
     const URL = useSelector(state => state.toolkit.URL);
     const [categories, setCategories] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
     const [fetchError, setFetchError] = useState(null);
 
     useEffect(() => {
@@ -28,7 +30,7 @@ const Categories = () => {
     }, [URL]);
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <Loader />;
     }
 
     if (fetchError) {
@@ -36,18 +38,21 @@ const Categories = () => {
     }
 
     return (
-        <section className={Styles.categories}>
-            {
-                categories.map(item => (
-                    <CategoryCard
-                        key={item.id}
-                        title={item.title}
-                        pictureUrl={item.picture_url}
-                        categoryId={item.id}
-                    />
-                ))
-            }
-        </section>
+        <>
+            <Banner />
+            <section className={Styles.categories}>
+                {
+                    categories.map(item => (
+                        <CategoryCard
+                            key={item.id}
+                            title={item.title}
+                            pictureUrl={item.picture_url}
+                            categoryId={item.id}
+                        />
+                    ))
+                }
+            </section>
+        </>
     )
 }
 

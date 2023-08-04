@@ -54,17 +54,3 @@ const ServiceForm = ({ handleFormOpen, name, serviceImage, fields }) => {
 }
 
 export default ServiceForm
-
-/*
-        - Отправка данных
-        - Баннер
-        - Вынести инпуты в миксин
-        - Split Названий 
-        - Обработать ошибки
-        - Маска
-        
-    - Валидация
-    - Поиск 
-    - Футер
-
-*/

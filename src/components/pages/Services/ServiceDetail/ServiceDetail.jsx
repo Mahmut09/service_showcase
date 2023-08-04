@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { fetchData } from '../../../../api/Api';
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import ServicePlug from '../ServicePlug/ServicePlug';
 import ServiceCard from '../ServiceCard/ServiceCard';
+import { clearSearchServices } from '../../../../store/toolkitSlice';
+import Loader from '../../../UI/loader/Loader';
 
 const ServiceDetail = () => {
+    const dispatch = useDispatch();
     const URL = useSelector(state => state.toolkit.URL);
+    const searchServices = useSelector(state => state.toolkit.searchServices);
     const { serviceId } = useParams();
     const [categoryData, setCategoryData] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
     const [fetchError, setFetchError] = useState(null);
 
     useEffect(() => {
@@ -25,12 +29,20 @@ const ServiceDetail = () => {
                 setIsLoading(false);
             }
         };
-
-        fetchCategories();
-    }, [URL, serviceId]);
+        if (searchServices.length !== 0) {
+            setCategoryData(searchServices);
+            dispatch(clearSearchServices());
+        } else {
+            fetchCategories();
+        }
+    }, [URL, serviceId, dispatch, searchServices]);
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <Loader />;
+    }
+
+    if (categoryData.length === 0 && searchServices.length === 0) {
+        return <h2>Сервисы не найдены.</h2>;
     }
 
     if (categoryData.length === 0) {
