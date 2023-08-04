@@ -1,0 +1,7 @@
+@import '../../../../assets/styles/mixins.scss'; 
+
+.card {
+    @include cardMixin;
+    text-transform: capitalize;
+    padding: 4em 2em;
+}

@@ -1,0 +1,70 @@
+@import '../../../../assets/styles/global.scss';
+@import '../../../../assets/styles/mixins.scss';
+
+.popupForm {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    cursor: pointer;
+}
+
+.popupContent {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: max(30vw, 320px);
+    height: max(40vh, 250px);
+    position: relative;
+    cursor: initial;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h3 {
+        font-size: 1.5em;
+        text-transform: capitalize;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        img {
+            width: 32px;
+            height: 32px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        height: max(55vh, 250px);
+    }
+}
+
+.close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    border: 0;
+    background: transparent;
+    font-size: 30px;
+    line-height: 20px;
+    transition: .3s ease-in-out;
+
+    &:hover {
+        color: $fontHoverColor;
+    }
+}
+
+.form {
+    @include formMixin;
+
+    button {
+        @include buttonMixin;
+    }
+}
