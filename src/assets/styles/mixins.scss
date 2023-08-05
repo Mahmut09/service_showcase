@@ -100,6 +100,12 @@
             top: 50%;
             transform: translateY(-50%);
             transition: .3s ease-in-out;
+
+            &.activeLabel {
+                top: -18px;
+                transform: translateY(0);
+                font-size: 0.8em;
+            }
         }
     }
 
